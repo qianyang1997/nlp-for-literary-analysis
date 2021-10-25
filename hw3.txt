@@ -1,0 +1,119 @@
+
+Here's the result for logistic regression models. Each row index represents a model with different hyperparameters.
+Each list element in precision, recall, and f1_score represents the result for a specific star rating (from 1 to 5).
+
+parameters:
+0  {'C': 1.0, 'class_weight': None, 'dual': False, 'fit_intercept': True, 'intercept_scaling': 1, 'l1_ratio': None, 'max_iter': 100, 'multi_class': 'auto', 'n_jobs': None, 'penalty': 'l2', 'random_state': 42, 'solver': 'lbfgs', 'tol': 0.0001, 'verbose': 0, 'warm_start': False}   
+1  {'C': 1.0, 'class_weight': None, 'dual': False, 'fit_intercept': True, 'intercept_scaling': 1, 'l1_ratio': None, 'max_iter': 100, 'multi_class': 'auto', 'n_jobs': None, 'penalty': 'l2', 'random_state': 42, 'solver': 'lbfgs', 'tol': 0.0001, 'verbose': 0, 'warm_start': False}   
+2  {'C': 0.9, 'class_weight': None, 'dual': False, 'fit_intercept': True, 'intercept_scaling': 1, 'l1_ratio': 0.5, 'max_iter': 100, 'multi_class': 'auto', 'n_jobs': None, 'penalty': 'elasticnet', 'random_state': 42, 'solver': 'saga', 'tol': 0.0001, 'verbose': 0, 'warm_start': False}   
+3  {'C': 0.9, 'class_weight': None, 'dual': False, 'fit_intercept': True, 'intercept_scaling': 1, 'l1_ratio': 0.5, 'max_iter': 100, 'multi_class': 'auto', 'n_jobs': None, 'penalty': 'elasticnet', 'random_state': 42, 'solver': 'saga', 'tol': 0.0001, 'verbose': 0, 'warm_start': False}   
+
+BOW:
+0  1-gram   
+1  2-gram   
+2  1-gram   
+3  2-gram   
+
+precision:
+0   [0.5289459095588818, 0.33672670321064996, 0.38552437223042835, 0.4277024387521625, 0.5782886375701807]   
+1     [0.420661266764042, 0.28059701492537314, 0.34756737836891843, 0.386913123844732, 0.5003411508154173]   
+2  [0.5289676547723119, 0.33681252509032517, 0.38750518887505186, 0.42931526790213315, 0.5780037592173117]   
+3     [0.42064019126045954, 0.280806572068708, 0.3473389355742297, 0.3870108735853244, 0.5003009751595169]   
+
+recall:
+0    [0.5509362369050566, 0.09878244888582587, 0.15306635388739948, 0.30580161200223444, 0.8523699997628814]   
+1   [0.2613214550853749, 0.043188605559384335, 0.08319369973190349, 0.20880217061687018, 0.8867996111256017]   
+2        [0.5490390167450301, 0.0963703193200092, 0.1564175603217158, 0.305961216183864, 0.8531287790766604]   
+3  [0.26123896725233026, 0.043188605559384335, 0.08310991957104558, 0.20876226957146277, 0.8868470348327129]   
+
+f1_score:
+0   [0.5397171717171717, 0.15275310834813496, 0.2191304347826087, 0.35662269374840044, 0.6890754691663312]  
+1   [0.32237712424951664, 0.07485566394584911, 0.13425268708172786, 0.2712312436831057, 0.639736572015053]  
+2    [0.5388164818262771, 0.14986157006340986, 0.22287214993434404, 0.3572909628870303, 0.689120858073166]  
+3  [0.32230816201913287, 0.07486311597809855, 0.1341265548945376, 0.27122158575464606, 0.6397160694432567]
+
+
+Here's the result for SVM models.
+
+parameters:
+0  {'C': 1.0, 'break_ties': False, 'cache_size': 200, 'class_weight': None, 'coef0': 0.0, 'decision_function_shape': 'ovo', 'degree': 3, 'gamma': 'scale', 'kernel': 'rbf', 'max_iter': 500, 'probability': False, 'random_state': 42, 'shrinking': True, 'tol': 0.001, 'verbose': False}   
+1  {'C': 1.0, 'break_ties': False, 'cache_size': 200, 'class_weight': None, 'coef0': 0.0, 'decision_function_shape': 'ovo', 'degree': 3, 'gamma': 'scale', 'kernel': 'rbf', 'max_iter': 500, 'probability': False, 'random_state': 42, 'shrinking': True, 'tol': 0.001, 'verbose': False}   
+2  {'C': 1.0, 'break_ties': False, 'cache_size': 200, 'class_weight': None, 'coef0': 0.0, 'decision_function_shape': 'ovo', 'degree': 3, 'gamma': 'scale', 'kernel': 'linear', 'max_iter': 500, 'probability': False, 'random_state': 42, 'shrinking': True, 'tol': 0.001, 'verbose': False}   
+3  {'C': 1.0, 'break_ties': False, 'cache_size': 200, 'class_weight': None, 'coef0': 0.0, 'decision_function_shape': 'ovo', 'degree': 3, 'gamma': 'scale', 'kernel': 'poly', 'max_iter': 500, 'probability': False, 'random_state': 42, 'shrinking': True, 'tol': 0.001, 'verbose': False}   
+
+BOW:
+0  1-gram   
+1  2-gram   
+2  1-gram   
+3  1-gram   
+
+precision:
+0  [0.16144682486309925, 0.09402907963687357, 0.22017353579175705, 0.25725593667546176, 0.5341245587852084]   
+1  [0.13994793554552346, 0.10378378378378378, 0.13994015138179897, 0.23340248962655602, 0.48453115879220987]   
+2  [0.3648867313915858, 0.12867581536268044, 0.17751703255109766, 0.23873970094598718, 0.3924952945416683]   
+3  [0.40458015267175573, 0.0, 0.0, 0.2727272727272727, 0.42238535054203397]   
+
+recall:
+0  [0.5544832137259754, 0.14633586032621182, 0.034014745308310994, 0.007780703854440987, 0.5346311621179427]   
+1  [0.3503258269405263, 0.0771881461061337, 0.06660522788203753, 0.008977735216662676, 0.6495150925947881]   
+2  [0.037202012703126286, 0.08293131173903055, 0.03929289544235925, 0.6243316574894262, 0.2323998766983615]   
+3  [0.008743710302730348, 0.0, 0.0, 0.00011970313622216902, 0.998719559907998]   
+
+f1_score:
+0  [0.2500790565300694, 0.11449112558975512, 0.05892597968069667, 0.015104570100697138, 0.5343777403834759]  
+1  [0.2, 0.08853171727817667, 0.09025373219049782, 0.01729040190578652, 0.5550219844791604]  
+2  [0.06752002395388876, 0.1008591185304184, 0.06434353134860749, 0.345400763780049, 0.2919397116644823]  
+3  [0.01711748082357691, 0.0, 0.0, 0.00023930124037809593, 0.5936852491366552]
+
+Based on the test metrics above, I will use the best performing model (the logistic regression model with 1-gram)
+to predict ratings based on input texts that the model has not seen before.
+
+The input texts are as follows:
+
+1.  "This is so highly rated for a reason. \
+    If you're looking for the best in Boulder for Italian, \
+    go here! The food is absolutely delicious. The smell from \
+    when you walk in is intoxicating. It's worth the price. \
+    The portions are not huge for the price but they're the right \
+    size in my opinion. The butternut squash ravioli with sage are \
+    a must-try. You can tell they take a ton of pride in their food. \
+    Its authentic, delicious, beautiful. It does not have a fine \
+    dining atmosphere, in fact the building has a very humble \
+    hole-in-the-wall feel to it, nothing like most of the other \
+    Italian places in Boulder. But I actually prefer that type of \
+    atmosphere anyway. Highly recommend!!"
+
+2.  "Best pizza in the neighborhood!!! \
+    Love the this crust, moderate amount of sauce and cheese which we like!"
+
+3.  "Bagels are decent enough, but the coffee is horrible! \
+    It's the worst my wife and I have ever tasted.\n\n\
+    This was the Downtown Winter Garden location today."
+
+Below are the prediction results in json format. Note that reviews 1 & 2 are
+assigned the right labels. Review 3 does not have the right label, but its 
+predicted probability of having good ratings is much lower.
+
+Output:
+
+{"label": 5.0,
+ "rating1_probability": 0.0005344759654861029,
+ "rating2_probability": 0.0028417557619340875,
+ "rating3_probability": 0.042137012955051366,
+ "rating4_probability": 0.307714123949597,
+ "rating5_probability": 0.6467726313679314}
+
+{"label": 5.0, 
+ "rating1_probability": 0.016499802123800613,
+ "rating2_probability": 0.02088405430588201,
+ "rating3_probability": 0.038121548911083124,
+ "rating4_probability": 0.171503092260526,
+ "rating5_probability": 0.7529915023987083}
+
+
+{"label": 5.0, 
+ "rating1_probability": 0.1426318329110684, 
+ "rating2_probability": 0.09299358109228147,
+ "rating3_probability": 0.12182518625012188,
+ "rating4_probability": 0.21906939906864314,
+ "rating5_probability": 0.42348000067788505}
