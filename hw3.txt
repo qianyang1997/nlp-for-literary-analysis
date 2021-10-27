@@ -1,76 +1,220 @@
-
-Here's the result for logistic regression models. Each row index represents a model with different hyperparameters.
-Each list element in precision, recall, and f1_score represents the result for a specific star rating (from 1 to 5).
-
-parameters:
-0  {'C': 1.0, 'class_weight': None, 'dual': False, 'fit_intercept': True, 'intercept_scaling': 1, 'l1_ratio': None, 'max_iter': 100, 'multi_class': 'auto', 'n_jobs': None, 'penalty': 'l2', 'random_state': 42, 'solver': 'lbfgs', 'tol': 0.0001, 'verbose': 0, 'warm_start': False}   
-1  {'C': 1.0, 'class_weight': None, 'dual': False, 'fit_intercept': True, 'intercept_scaling': 1, 'l1_ratio': None, 'max_iter': 100, 'multi_class': 'auto', 'n_jobs': None, 'penalty': 'l2', 'random_state': 42, 'solver': 'lbfgs', 'tol': 0.0001, 'verbose': 0, 'warm_start': False}   
-2  {'C': 0.9, 'class_weight': None, 'dual': False, 'fit_intercept': True, 'intercept_scaling': 1, 'l1_ratio': 0.5, 'max_iter': 100, 'multi_class': 'auto', 'n_jobs': None, 'penalty': 'elasticnet', 'random_state': 42, 'solver': 'saga', 'tol': 0.0001, 'verbose': 0, 'warm_start': False}   
-3  {'C': 0.9, 'class_weight': None, 'dual': False, 'fit_intercept': True, 'intercept_scaling': 1, 'l1_ratio': 0.5, 'max_iter': 100, 'multi_class': 'auto', 'n_jobs': None, 'penalty': 'elasticnet', 'random_state': 42, 'solver': 'saga', 'tol': 0.0001, 'verbose': 0, 'warm_start': False}   
-
-BOW:
-0  1-gram   
-1  2-gram   
-2  1-gram   
-3  2-gram   
-
-precision:
-0   [0.5289459095588818, 0.33672670321064996, 0.38552437223042835, 0.4277024387521625, 0.5782886375701807]   
-1     [0.420661266764042, 0.28059701492537314, 0.34756737836891843, 0.386913123844732, 0.5003411508154173]   
-2  [0.5289676547723119, 0.33681252509032517, 0.38750518887505186, 0.42931526790213315, 0.5780037592173117]   
-3     [0.42064019126045954, 0.280806572068708, 0.3473389355742297, 0.3870108735853244, 0.5003009751595169]   
-
-recall:
-0    [0.5509362369050566, 0.09878244888582587, 0.15306635388739948, 0.30580161200223444, 0.8523699997628814]   
-1   [0.2613214550853749, 0.043188605559384335, 0.08319369973190349, 0.20880217061687018, 0.8867996111256017]   
-2        [0.5490390167450301, 0.0963703193200092, 0.1564175603217158, 0.305961216183864, 0.8531287790766604]   
-3  [0.26123896725233026, 0.043188605559384335, 0.08310991957104558, 0.20876226957146277, 0.8868470348327129]   
-
-f1_score:
-0   [0.5397171717171717, 0.15275310834813496, 0.2191304347826087, 0.35662269374840044, 0.6890754691663312]  
-1   [0.32237712424951664, 0.07485566394584911, 0.13425268708172786, 0.2712312436831057, 0.639736572015053]  
-2    [0.5388164818262771, 0.14986157006340986, 0.22287214993434404, 0.3572909628870303, 0.689120858073166]  
-3  [0.32230816201913287, 0.07486311597809855, 0.1341265548945376, 0.27122158575464606, 0.6397160694432567]
+Github: https://github.com/MSIA/qyt9304_msia_text_analytics_2021/tree/homework3
 
 
-Here's the result for SVM models.
+Dataset facts
 
-parameters:
-0  {'C': 1.0, 'break_ties': False, 'cache_size': 200, 'class_weight': None, 'coef0': 0.0, 'decision_function_shape': 'ovo', 'degree': 3, 'gamma': 'scale', 'kernel': 'rbf', 'max_iter': 500, 'probability': False, 'random_state': 42, 'shrinking': True, 'tol': 0.001, 'verbose': False}   
-1  {'C': 1.0, 'break_ties': False, 'cache_size': 200, 'class_weight': None, 'coef0': 0.0, 'decision_function_shape': 'ovo', 'degree': 3, 'gamma': 'scale', 'kernel': 'rbf', 'max_iter': 500, 'probability': False, 'random_state': 42, 'shrinking': True, 'tol': 0.001, 'verbose': False}   
-2  {'C': 1.0, 'break_ties': False, 'cache_size': 200, 'class_weight': None, 'coef0': 0.0, 'decision_function_shape': 'ovo', 'degree': 3, 'gamma': 'scale', 'kernel': 'linear', 'max_iter': 500, 'probability': False, 'random_state': 42, 'shrinking': True, 'tol': 0.001, 'verbose': False}   
-3  {'C': 1.0, 'break_ties': False, 'cache_size': 200, 'class_weight': None, 'coef0': 0.0, 'decision_function_shape': 'ovo', 'degree': 3, 'gamma': 'scale', 'kernel': 'poly', 'max_iter': 500, 'probability': False, 'random_state': 42, 'shrinking': True, 'tol': 0.001, 'verbose': False}   
+I'm using the first 500K entries of the Yelp review dataset for this HW.
+The dataset consists of reviews given by Yelp users as well as their star
+ratings (integers from 1 to 5).
 
-BOW:
-0  1-gram   
-1  2-gram   
-2  1-gram   
-3  1-gram   
+For text classification, I will use the ratings as the resopnse variable.
 
-precision:
-0  [0.16144682486309925, 0.09402907963687357, 0.22017353579175705, 0.25725593667546176, 0.5341245587852084]   
-1  [0.13994793554552346, 0.10378378378378378, 0.13994015138179897, 0.23340248962655602, 0.48453115879220987]   
-2  [0.3648867313915858, 0.12867581536268044, 0.17751703255109766, 0.23873970094598718, 0.3924952945416683]   
-3  [0.40458015267175573, 0.0, 0.0, 0.2727272727272727, 0.42238535054203397]   
+Below are the dataset stats:
 
-recall:
-0  [0.5544832137259754, 0.14633586032621182, 0.034014745308310994, 0.007780703854440987, 0.5346311621179427]   
-1  [0.3503258269405263, 0.0771881461061337, 0.06660522788203753, 0.008977735216662676, 0.6495150925947881]   
-2  [0.037202012703126286, 0.08293131173903055, 0.03929289544235925, 0.6243316574894262, 0.2323998766983615]   
-3  [0.008743710302730348, 0.0, 0.0, 0.00011970313622216902, 0.998719559907998]   
+                             value
+number_of_documents  500000.000000
+number_of_labels          5.000000
+label_mean                3.768648
+label_median              4.000000
+label_min                 1.000000
+label_max                 5.000000
+label_std                 1.385620
+label_25_quantile         3.000000
+label_75_quantile         5.000000
 
-f1_score:
-0  [0.2500790565300694, 0.11449112558975512, 0.05892597968069667, 0.015104570100697138, 0.5343777403834759]  
-1  [0.2, 0.08853171727817667, 0.09025373219049782, 0.01729040190578652, 0.5550219844791604]  
-2  [0.06752002395388876, 0.1008591185304184, 0.06434353134860749, 0.345400763780049, 0.2919397116644823]  
-3  [0.01711748082357691, 0.0, 0.0, 0.00023930124037809593, 0.5936852491366552]
 
-Based on the test metrics above, I will use the best performing model (the logistic regression model with 1-gram)
-to predict ratings based on input texts that the model has not seen before.
+Approach
 
-The input texts are as follows:
+First, we transform 500K rows of labelled Yelp reviews into datasets with
+1-gram or 2-gram features. Next, for both processed datasets, we randomly
+divide the 500K rows into train and test sets (80% for training, 20% for testing).
+For each model (i.e. logistic regression and SVM) and each dataset,
+we perform hyperparameter tuning via grid search and 3-fold CV on the training set.
+Then, we fit the best model on the hold-out test set for model/CBOW comparisons.
+Finally, we use the best model-CBOW-hyperparameter combination to predict on
+data that the model has not seen before. 
 
-1.  "This is so highly rated for a reason. \
+The metric used for model evaluation and model selection is micro-averaged
+f1 score.
+
+
+Disclaimer
+
+Note that the entire pipeline is vetted for reproducible results (random seeds
+are set for every step in the modeling process).
+
+Instead of sklearn's GridSearchCV method, I used the RandomSearchCV
+method, based on prior experience, yields better results. In order not
+to kill my computer, I've also capped max iterations for cross validation,
+model fitting, and random search.
+
+To better organize my python scripts, I added 'grid_search' and 'evaluate' functions
+to a standalone module named 'train_test.py'.
+
+I also pushed the 500K rows of Yelp reviews onto github.
+
+
+Choosing logistic regression hyperparameters
+
+I played with the amount of regularization applied to the model as well
+as well as the solver. For regularization, I tested C = 0.8, 0.9, and 1.0.
+For the solver, I tested newton-cg, saga, and lbfgs, which are the only
+solvers compatible with l2-regularization and multi-class predictions.
+
+
+Choosing SVM hyperparameters
+
+I played with the shape of the kernel as well as the amount of regularization.
+For regularization, I tested C = 0.8, 0.9, and 1.0. For the kernel, I tested
+polynomial, rgb, and sigmoid shapes. Based on prior experience, kernels with
+more complex shapes and stronger regularization tend to yield better performances.
+
+
+Grid search and test set results
+
+In the table printout below, each row represents a different set of
+hyperparameter combinations. 
+
+Result of hyperparameter tuning for logistic regression with 1-gram features:
+
+   mean_fit_time  std_fit_time  mean_score_time  std_score_time param_solver  \
+0      33.767880      2.279096         0.183503        0.004163    newton-cg   
+1      36.636091      1.964463         0.181716        0.003534    newton-cg   
+2      23.200813      0.563632         0.179724        0.002164         saga   
+3       6.557003      0.173391         0.180550        0.002028        lbfgs   
+4      23.335785      0.594142         0.180612        0.003373         saga   
+
+  param_C                             params  split0_test_f1_micro  \
+0     1.0  {'solver': 'newton-cg', 'C': 1.0}              0.527255   
+1     0.8  {'solver': 'newton-cg', 'C': 0.8}              0.527240   
+2     0.9       {'solver': 'saga', 'C': 0.9}              0.527240   
+3     0.8      {'solver': 'lbfgs', 'C': 0.8}              0.527315   
+4     1.0       {'solver': 'saga', 'C': 1.0}              0.527247   
+
+   split1_test_f1_micro  split2_test_f1_micro  mean_test_f1_micro  \
+0              0.525549              0.528376            0.527060   
+1              0.525571              0.528376            0.527062   
+2              0.525549              0.528376            0.527055   
+3              0.525811              0.528669            0.527265   
+4              0.525549              0.528376            0.527057   
+
+   std_test_f1_micro  rank_test_f1_micro  n_gram
+0           0.001163                   3       1  
+1           0.001152                   2       1  
+2           0.001162                   5       1
+3           0.001167                   1       1  
+4           0.001162                   4       1
+
+f1 result on test set: 0.53009
+
+
+Result of hyperparameter tuning for logistic regression with 2-gram features:
+
+   mean_fit_time  std_fit_time  mean_score_time  std_score_time param_solver  \
+0      15.399896      0.480275         0.177984        0.003492    newton-cg   
+1      16.257997      0.272905         0.177221        0.002420    newton-cg   
+2       6.891226      0.329609         0.177662        0.003287         saga   
+3       6.931776      0.143437         0.175347        0.002784        lbfgs   
+4       6.873224      0.372286         0.175553        0.002971         saga   
+
+  param_C                             params  split0_test_f1_micro  \
+0     1.0  {'solver': 'newton-cg', 'C': 1.0}              0.470345   
+1     0.8  {'solver': 'newton-cg', 'C': 0.8}              0.470353   
+2     0.9       {'solver': 'saga', 'C': 0.9}              0.470345   
+3     0.8      {'solver': 'lbfgs', 'C': 0.8}              0.470338   
+4     1.0       {'solver': 'saga', 'C': 1.0}              0.470345   
+
+   split1_test_f1_micro  split2_test_f1_micro  mean_test_f1_micro  \
+0              0.469929              0.469891            0.470055   
+1              0.469929              0.469884            0.470055   
+2              0.469936              0.469891            0.470057   
+3              0.469906              0.469891            0.470045   
+4              0.469951              0.469884            0.470060   
+
+   std_test_f1_micro  rank_test_f1_micro  n_gram
+0           0.000206                   3       2   
+1           0.000211                   4       2   
+2           0.000204                   2       2  
+3           0.000207                   5       2  
+4           0.000204                   1       2  
+
+f1 result on test set: 0.47171
+
+
+Result of hyperparameter tuning for SVM with 1-gram features:
+
+   mean_fit_time  std_fit_time  mean_score_time  std_score_time param_kernel  \
+0      22.698955      0.085245        18.551620        0.498985          rbf   
+1      22.825945      0.080709        19.149259        0.789464          rbf   
+2      24.413917      0.223839         9.230359        0.120152      sigmoid   
+3      21.413352      0.310265         7.817502        0.405617         poly   
+4      24.161114      0.137829         9.211541        0.079287      sigmoid   
+
+  param_C                           params  split0_test_f1_micro  \
+0     1.0      {'kernel': 'rbf', 'C': 1.0}              0.318036   
+1     0.8      {'kernel': 'rbf', 'C': 0.8}              0.317766   
+2     0.9  {'kernel': 'sigmoid', 'C': 0.9}              0.374788   
+3     0.8     {'kernel': 'poly', 'C': 0.8}              0.422930   
+4     1.0  {'kernel': 'sigmoid', 'C': 1.0}              0.374788   
+
+   split1_test_f1_micro  split2_test_f1_micro  mean_test_f1_micro  \
+0              0.309496              0.317873            0.315135   
+1              0.309496              0.317971            0.315077   
+2              0.376283              0.372976            0.374682   
+3              0.423076              0.422679            0.422895   
+4              0.376283              0.372976            0.374682   
+
+   std_test_f1_micro  rank_test_f1_micro  n_gram
+0           0.003988                   4       1   
+1           0.003948                   5       1  
+2           0.001352                   2       1  
+3           0.000164                   1       1  
+4           0.001352                   2       1 
+
+f1 result on test set: 0.42202
+
+
+Result of hyperparameter tuning for SVM with 2-gram features:
+
+   mean_fit_time  std_fit_time  mean_score_time  std_score_time param_kernel  \
+0      22.931757      0.113773        20.884288        2.313909          rbf   
+1      23.205891      0.178477        20.912485        2.343333          rbf   
+2      24.012467      0.169316        13.043323        0.573042      sigmoid   
+3      21.898145      0.175219         9.473777        0.198051         poly   
+4      23.973082      0.059758        13.012695        0.505945      sigmoid   
+
+  param_C                           params  split0_test_f1_micro  \
+0     1.0      {'kernel': 'rbf', 'C': 1.0}              0.310513   
+1     0.8      {'kernel': 'rbf', 'C': 0.8}              0.310513   
+2     0.9  {'kernel': 'sigmoid', 'C': 0.9}              0.209856   
+3     0.8     {'kernel': 'poly', 'C': 0.8}              0.422608   
+4     1.0  {'kernel': 'sigmoid', 'C': 1.0}              0.209856   
+
+   split1_test_f1_micro  split2_test_f1_micro  mean_test_f1_micro  \
+0              0.329723              0.333421            0.324553   
+1              0.323881              0.333421            0.322605   
+2              0.143483              0.131580            0.161640   
+3              0.422379              0.422716            0.422567   
+4              0.143483              0.131580            0.161640   
+
+   std_test_f1_micro  rank_test_f1_micro  n_gram
+0           0.010041                   2       2  
+1           0.009395                   3       2   
+2           0.034439                   4       2 
+3           0.000141                   1       2  
+4           0.034439                   4       2
+
+f1 result on test set: 0.42137
+
+
+Final predictions
+
+Based on the above iterations of hyperparameter tuning and CV evaluation,
+the best model is logistic regression with solver = 'lbfgs' solver C = 0.8.
+
+We fed the following three pieces of text into the model:
+
+    "This is so highly rated for a reason. \
     If you're looking for the best in Boulder for Italian, \
     go here! The food is absolutely delicious. The smell from \
     when you walk in is intoxicating. It's worth the price. \
@@ -81,39 +225,40 @@ The input texts are as follows:
     dining atmosphere, in fact the building has a very humble \
     hole-in-the-wall feel to it, nothing like most of the other \
     Italian places in Boulder. But I actually prefer that type of \
-    atmosphere anyway. Highly recommend!!"
-
-2.  "Best pizza in the neighborhood!!! \
-    Love the this crust, moderate amount of sauce and cheese which we like!"
-
-3.  "Bagels are decent enough, but the coffee is horrible! \
+    atmosphere anyway. Highly recommend!!",
+    "Best pizza in the neighborhood!!! \
+    Love the this crust, moderate amount of sauce and cheese which we like!",
+    "Bagels are decent enough, but the coffee is horrible! \
     It's the worst my wife and I have ever tasted.\n\n\
     This was the Downtown Winter Garden location today."
 
-Below are the prediction results in json format. Note that reviews 1 & 2 are
-assigned the right labels. Review 3 does not have the right label, but its 
-predicted probability of having good ratings is much lower.
+The predicted labels as well as the probabilities of each ratings are as follows:
 
-Output:
+{"label": 5.0, 
+ "rating1_probability": 0.0008438856930757459,
+ "rating2_probability": 0.003225488860759244,
+ "rating3_probability": 0.03459860520743991,
+ "rating4_probability": 0.3094928706721507,
+ "rating5_probability": 0.6518391495665744}
+
 
 {"label": 5.0,
- "rating1_probability": 0.0005344759654861029,
- "rating2_probability": 0.0028417557619340875,
- "rating3_probability": 0.042137012955051366,
- "rating4_probability": 0.307714123949597,
- "rating5_probability": 0.6467726313679314}
-
-{"label": 5.0, 
- "rating1_probability": 0.016499802123800613,
- "rating2_probability": 0.02088405430588201,
- "rating3_probability": 0.038121548911083124,
- "rating4_probability": 0.171503092260526,
- "rating5_probability": 0.7529915023987083}
+ "rating1_probability": 0.017885057347125574, 
+ "rating2_probability": 0.02108608265665447, 
+ "rating3_probability": 0.03843370869126584, 
+ "rating4_probability": 0.1720670834850842, 
+ "rating5_probability": 0.7505280678198699}
 
 
-{"label": 5.0, 
- "rating1_probability": 0.1426318329110684, 
- "rating2_probability": 0.09299358109228147,
- "rating3_probability": 0.12182518625012188,
- "rating4_probability": 0.21906939906864314,
- "rating5_probability": 0.42348000067788505}
+{"label": 5.0,
+ "rating1_probability": 0.14248450738406138, 
+ "rating2_probability": 0.09519321888022958, 
+ "rating3_probability": 0.12356681057079022, 
+ "rating4_probability": 0.21904388414905504, 
+ "rating5_probability": 0.4197115790158638}
+
+ Note that the third piece of text is predicted with rating 5 while the review
+ obviously corresponds to a low rating. On the other hand, compared to the
+ predictions for the first two pieces of text, the probabilities for ratings 4 & 5
+ in this case are much lower, meaning that the model is less confident about its 
+ high-rating predictions.

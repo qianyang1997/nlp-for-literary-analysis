@@ -5,12 +5,13 @@ from sklearn.feature_extraction.text import CountVectorizer
 import dataset_stats as ds
 
 # train model on entire yelp subset
-def train_model():
+def train_model(**kwargs):
     data = ds.get_data()
     vectorize = CountVectorizer(ngram_range=(1, 1), max_df=0.8,
                                 max_features=100).fit(data['text'])
     features = vectorize.transform(data['text'])
-    model = LogisticRegression(random_state=42).fit(features, data['stars'])
+    model = LogisticRegression(random_state=42, max_iter=80, **kwargs) \
+        .fit(features, data['stars'])
     return vectorize, model
 
 # predict new input:
@@ -49,6 +50,10 @@ if __name__ == '__main__':
           This was the Downtown Winter Garden location today."
     ])
 
-    vector, model = train_model()
+    best_params = {
+        'solver': 'lbfgs',
+        'C': 0.8
+    }
+    vector, model = train_model(**best_params)
     predict_new(input, vector, model)
 
