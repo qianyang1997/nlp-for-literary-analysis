@@ -1,4 +1,4 @@
-Link to python code: 
+Link to python code: https://github.com/MSIA/qyt9304_msia_text_analytics_2021/blob/homework4/bias.py
 
 
 Approach to bias detection
