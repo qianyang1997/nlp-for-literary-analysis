@@ -1,0 +1,83 @@
+Link to python code: 
+
+
+Approach to bias detection
+
+As we've discussed earlier in lectures, bias in NLP models are inevitable because it's ubiquitous in text language on which
+we train our models. The literature we went through (in class and for homework) provides insights on how we may deliberately
+"de-bias" the models in a scientific way; some papers also attempt to define bias in model development from a more
+philosophical perspective.
+
+I think there are two approaches to bias detection in the context of word embeddings. First, we may look at the mathematical 
+representations of language and examine how the embeddings communicate bias in the source text (i.e. training set). Second,
+we may use a model trained on a biased dataset for prediction/text generation purposes and assess bias in the outcome. For this
+assignment, I'll be strictly working with the first approach.
+
+I collected and cleaned a corpus of movie dialogues from a wide range of genres and characters. The original corpus can be found
+at https://www.kaggle.com/Cornell-University/movie-dialog-corpus. For each line, we have metadata about the movie which it appeared
+in, the importance of the character who spoke it, and the gender of the character. I dropped all lines without
+corresponding character designations and created two datasets, one consisting of lines by female characters and the other
+consisting of lines by male characters.
+
+I then trained a Word2Vec model on both datasets separately, with the same model parameters. After 20 epochs, I saved the model
+and looked at the most similar words to specific input words of my choice. The results I'm about to show below are telling
+evidence of how directors/screenwriters (mostly male) curate different personas for female and male characters.
+
+Results:
+
+Most similar words to 'man':
+Female characters: [('woman', 0.70), ('guy', 0.67), ('person', 0.61), ('lady', 0.60), ('kid', 0.60)]
+Male characters: [('woman', 0.69), ('guy', 0.67), ('kid', 0.63), ('fellow', 0.61), ('cop', 0.58)]
+
+Most similar words to 'woman':
+Female characters: [('person', 0.73), ('man', 0.70), ('girl', 0.65), ('child', 0.62), ('cop', 0.62)]
+Male characters: [('girl', 0.79), ('child', 0.70), ('man', 0.69), ('lady', 0.63), ('person', 0.63)]
+
+Most similar words to 'marriage':
+Female characters: [(‘future’, 0.71), (‘relationship’, 0.69), (‘condition’, 0.63), (‘personality’, 0.63), (‘secretary’, 0.61)]
+Male characters: [(‘relationship’, 0.63), (‘reaction’, 0.59), (‘soul’, 0.57), (‘jurisdiction’, 0.57), (‘appearance’, 0.56)]
+
+Most similar words to 'death':
+Female characters: [(‘science’, 0.51), (‘highest’, 0.48), (‘race’, 0.46), (‘emotion’, 0.44), (‘effects’, 0.44)]
+Male characters: [(‘princess’, 0.50), (‘fear’, 0.49), (‘marriage’, 0.49), (‘thus’, 0.48), (‘child’, 0.48)]
+
+Most similar words to 'attractive':
+Female characters: [(‘ambitious’, 0.68), (‘bright’, 0.67), (‘talented’, 0.67), (‘charming’, 0.66), (‘honest’, 0.65)]
+Male characters: [(‘wealthy’, 0.75), (‘intelligent’, 0.72), (‘clever’, 0.70), (‘groovy’, 0.69), (‘charming’, 0.66)]
+
+Most similar words to 'sexy':
+Female characters: [(‘familiar’, 0.64), (‘strange’, 0.61), (‘sad’, 0.59), (‘corny’, 0.59), (‘intense’, 0.57)]
+Male characters: [(‘impressive’, 0.73), (‘cozy’, 0.64), (‘groovy’, 0.63), (‘thoughtful’, 0.63), (‘nifty’, 0.62)]
+
+
+Shortcomings of the method
+
+There are several shortcomings. First, the amount of data varies by gender of characters (which, ironically, is another
+evidence of pre-existing bias) - there are about ~70K lines by female characters compared to ~180k by male characters.
+It could be because female lines aren't labeled as frequently as male lines (which is less likely), or because
+females don't talk as often in the movies in our sample (which is more likely). Regardless of the reason behind
+different sample sizes, we have less female data to train on, and therefore our word embeddings for female speech
+will be more biased (in a scientific sense).
+
+Second, inferring bias purely from mathematical embeddings itself is problematic. Word embeddings are clever
+mathematical representations of text, but I believe these numbers do not have meaning without knowing how the model
+will be used and what the predicted outcome would be. Ultimately, we're judging the quality of a model based on how
+it performs on the tasks we assign it. Word embeddings without qualitative context are not sufficient to prove
+or disprove bias.
+
+While I can't do much for point two, there are ways to mitigate point one. I could oversample female lines elsewhere
+to balance the dataset, or downsample male lines for the same purpose. For this assignment however, I chose to keep
+the dataset as it is because we don't have a large corpus to begin with, and scraping external text sources is too
+time-consuming.
+
+
+How gender bias in embeddings can lead to allocational and representational harm
+
+Say we want to predict what the next big hit would be on Hollywood and help content curators engineer scripts via word
+embeddings trained on this dataset. The model may pick up on unfavorable gendered connotations and produce results
+that demean female characters which in turn influence how screenwriters portray females. This is an example of
+representational harm.
+
+If the aforementioned model picks up the nuances in the text, predicts that the next big hit would be written
+by a male writer and reinforces Hollywood's already male-dominated hierarchy, then we have an example
+of allocational harm.
