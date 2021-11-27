@@ -6,6 +6,7 @@ from nltk.corpus import stopwords
 from sklearn.model_selection import train_test_split
 
 def read_data(filepath):
+    """Read raw data and output list of passages."""
     with open(filepath, 'r') as f:
         text = f.readlines()
     text = [t for t in text if len(t) >= 100]
@@ -13,6 +14,7 @@ def read_data(filepath):
 
 
 def create_dataset(barack_filepath, michelle_filepath):
+    """Create dataset and from raw data inputs."""
     barack = read_data(barack_filepath)
     michelle = read_data(michelle_filepath)
     b_labels = [0] * len(barack)
@@ -23,6 +25,7 @@ def create_dataset(barack_filepath, michelle_filepath):
 def create_train_test(b_filepath, m_filepath,
                       b_test_size, m_test_size,
                       b_seed, m_seed):
+    """Create randomly shuffled train and test sets."""
     
     b, bl, m, ml = create_dataset(b_filepath, m_filepath)
     bx_train, bx_test, by_train, by_test = train_test_split(b, bl,
@@ -39,6 +42,7 @@ def create_train_test(b_filepath, m_filepath,
 
 
 def eda(text_list):
+    """Perform eda on input data."""
     print(f"Number of paragraphs: {len(text_list)}")
     tokenizer = RegexpTokenizer('[A-Za-z-]+')
 
@@ -48,6 +52,7 @@ def eda(text_list):
             break
         except LookupError:
             nltk.download('stopwords')
+
     text = ' '.join(text_list)
     tokens = tokenizer.tokenize(text)
     tokens = [t.lower() for t in tokens]
@@ -58,7 +63,6 @@ def eda(text_list):
     dic = dict(Counter(nonstops))
     df = pd.DataFrame({'word': dic.keys(), 'count': dic.values()})
     return df.sort_values('count', ascending=False)
-    
 
 
 
@@ -68,8 +72,5 @@ if __name__ == '__main__':
     _, x_test, _, y_test = create_train_test('data/barack.txt',
                                         'data/michelle.txt',
                                         0.2, 0.2, 42, 21)
-    df = pd.DataFrame({'text': x_test, 'label': y_test})
-    print(sum(df.label==0))
-    print(sum(df.label==1))
     #eda(b).to_csv('top_barack_words.csv', index=False)
     #eda(m).to_csv('top_michelle_words.csv', index=False)

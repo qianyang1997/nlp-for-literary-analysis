@@ -22,10 +22,21 @@ if physical_devices:
 
 
 class Bert:
-
+    """BERT model for classification"""
     def __init__(self, model_name, token_name=None, train=True,
                  maxlen=50, epochs=10, decay=0.01):
-        
+        """
+        Params:
+            model_name: str - name of pretrained model
+            token_name: str - name of pretrained model with tokenizer
+            train: bool - whether to fine-tune the pretrained model or not
+            maxlen: int - max number of tokens in a passage
+            epochs: int - number of training epochs
+            decay: float - rate of decay
+
+        Returns:
+            None
+        """
         self.maxlen = maxlen
         
         if train:
@@ -53,6 +64,16 @@ class Bert:
                                                            do_lower_case=True)
 
     def encode(self, text, labels=None):
+        """Encode raw text data into numerical model input.
+
+        Params:
+            text: list of str - list of passages
+            labels: list of int - list of author labels:
+                    0 for Barack, 1 for Michelle, default None
+        
+        Returns:
+            :obj: tf.data.Dataset - encoded text
+        """
         if labels is None:
             encodings = self.tokenizer(text, truncation=True, padding='max_length',
                                        max_length=self.maxlen, return_tensors='tf')
@@ -64,7 +85,14 @@ class Bert:
         return encodings
 
     def train(self, train_dataset, test_dataset):
-
+        """Train model.
+        Params:
+            train_dataset: tf.data.Dataset - encoded train set
+            test_dataset: tf.data.Dataset - encoded test set
+        
+        Returns:
+            :obj: TFTrainer - tensorflow trainer object
+        """
         trainer = TFTrainer(model=self.model,
                             args=self.training_args,
                             train_dataset=train_dataset,
@@ -73,6 +101,13 @@ class Bert:
         return trainer
 
     def predict(self, text_list):
+        """Predict results.
+        Params:
+            text_list: list of str - list of passages for prediction
+
+        Returns:
+            tuple: (np.array, np.array) - soft and hard predictions
+        """
         input_text = self.encode(text_list)
         result = self.model(input_text)[0].numpy()
         prediction_prob = tf.nn.softmax(result).numpy()
@@ -83,6 +118,7 @@ class Bert:
         self.model.save_pretrained(model_path)
         
     def save_result(self, x_test, y_test):
+        """Save model prediction result as csv."""
         pred_prob, pred_hard = self.predict(x_test)
         df1 = pd.DataFrame({'text': x_test, 'label': y_test, 'pred_hard': pred_hard})
         df2 = pd.DataFrame(pred_prob)
@@ -92,6 +128,7 @@ class Bert:
         return result
         
     def main(self, x_train, x_test, y_train, y_test):
+        """Training pipeline."""
         train_encoded = self.encode(x_train, y_train)
         test_encoded = self.encode(x_test, y_test)
         trainer = self.train(train_encoded, test_encoded) 
@@ -104,9 +141,9 @@ if __name__ == '__main__':
     trained_model = "test_model"
     example_text = "Why can't I like waffles?"
     
-    #x_train, x_test, y_train, y_test = create_train_test('data/barack.txt',
-                                                         #'data/michelle.txt',
-                                                         #0.2, 0.2, 42, 21)
+    x_train, x_test, y_train, y_test = create_train_test('data/barack.txt',
+                                                         'data/michelle.txt',
+                                                         0.2, 0.2, 42, 21)
     
     # train new
     #pip = Bert(model_name, maxlen=100, epochs=100)
@@ -117,17 +154,7 @@ if __name__ == '__main__':
     
     # load trained model
     pip = Bert(trained_model, model_name, train=False)
-    print(pd.DataFrame(pip.predict(["values", "morals", "America", "united",
-             "immigrant", "president", "they", "Oval Office",
-             "wealth", "law", "healthcare", "insightful",
-             "communicate", "speech", "military", "fellow",
-             "dream", "private", "idea", "Kant", "income",
-             "inequality", "ambition", "poverty", "diplomacy",
-             "angry", "terror", "war", "compromise", "enforcement",
-             "leadership", "economy", "analyze", "think", "impartial",
-             "legislation", "tax", "growth", "idealistic",
-             "politics", "employment", "fair"])))
-    #print(pip.predict([example_text]))
+    print(pip.predict([example_text]))
     
     # save result
     #result = pip.save_result(x_test, y_test)

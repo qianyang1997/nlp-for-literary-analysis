@@ -8,6 +8,7 @@ from modeling import Bert
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'any secret string'
 
+# load trained model
 model = Bert(token_name="bert-base-uncased",
              model_name="test_model",
              train=False)
