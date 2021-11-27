@@ -1,6 +1,6 @@
 # Independent Project
 
-how to run REST API:
+How to run REST API:
 
 Clone this repo and install relevant packages in requirements.txt.
 
