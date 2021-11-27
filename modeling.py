@@ -2,10 +2,14 @@ import os
 import numpy as np
 import pandas as pd
 import tensorflow as tf
-from sklearn.model_selection import train_test_split
-from transformers import BertTokenizerFast, TFBertForSequenceClassification, \
-    TFTrainer, TFTrainingArguments
-from tensorflow.config.experimental import list_physical_devices, set_memory_growth
+from tensorflow.config.experimental import list_physical_devices, \
+                                           set_memory_growth
+from transformers import BertTokenizerFast, \
+                         TFBertForSequenceClassification, \
+                         TFTrainer, \
+                         TFTrainingArguments
+from sklearn.metrics import classification_report
+from preprocessing import create_train_test
 
 
 # tensorflow config
@@ -15,39 +19,6 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 physical_devices = list_physical_devices('GPU')
 if physical_devices:
     set_memory_growth(physical_devices[0], True)
-
-
-def read_data(filepath):
-    with open(filepath, 'r') as f:
-        text = f.readlines()
-    text = [t for t in text if len(t) >= 100]
-    return text
-
-
-def create_dataset(barack_filepath, michelle_filepath):
-    barack = read_data(barack_filepath)
-    michelle = read_data(michelle_filepath)
-    b_labels = [0] * len(barack)
-    m_labels = [1] * len(michelle)
-    return barack, b_labels, michelle, m_labels
-
-
-def create_train_test(b_filepath, m_filepath,
-                      b_test_size, m_test_size,
-                      b_seed, m_seed):
-    
-    b, bl, m, ml = create_dataset(b_filepath, m_filepath)
-    bx_train, bx_test, by_train, by_test = train_test_split(b, bl,
-                                                            test_size=b_test_size,
-                                                            random_state=b_seed)
-    mx_train, mx_test, my_train, my_test = train_test_split(m, ml,
-                                                            test_size=m_test_size, 
-                                                            random_state=m_seed)
-    x_train = bx_train + mx_train
-    x_test = bx_test + mx_test
-    y_train = by_train + my_train
-    y_test = by_test + my_test
-    return x_train, x_test, y_train, y_test
 
 
 class Bert:
@@ -131,10 +102,11 @@ class Bert:
 if __name__ == '__main__':
     model_name = "bert-base-uncased"
     trained_model = "test_model"
-    example_text = "I figured I could do all that in maybe five hundred pages. I expected to be done in a year."
+    example_text = "Why can't I like waffles?"
     
-    x_train, x_test, y_train, y_test = create_train_test('barack.txt', 'michelle.txt',
-                                                         0.2, 0.2, 42, 21)
+    #x_train, x_test, y_train, y_test = create_train_test('data/barack.txt',
+                                                         #'data/michelle.txt',
+                                                         #0.2, 0.2, 42, 21)
     
     # train new
     #pip = Bert(model_name, maxlen=100, epochs=100)
@@ -145,8 +117,18 @@ if __name__ == '__main__':
     
     # load trained model
     pip = Bert(trained_model, model_name, train=False)
-    print(pip.predict([example_text]))
+    print(pd.DataFrame(pip.predict(["values", "morals", "America", "united",
+             "immigrant", "president", "they", "Oval Office",
+             "wealth", "law", "healthcare", "insightful",
+             "communicate", "speech", "military", "fellow",
+             "dream", "private", "idea", "Kant", "income",
+             "inequality", "ambition", "poverty", "diplomacy",
+             "angry", "terror", "war", "compromise", "enforcement",
+             "leadership", "economy", "analyze", "think", "impartial",
+             "legislation", "tax", "growth", "idealistic",
+             "politics", "employment", "fair"])))
+    #print(pip.predict([example_text]))
     
     # save result
-    result = pip.save_result(x_test, y_test)
+    #result = pip.save_result(x_test, y_test)
     #result.to_csv('test_set_performance.csv', index=False)
